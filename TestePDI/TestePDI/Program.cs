@@ -54,7 +54,24 @@ namespace TestePDI
 
             b2.Save(@"C:\Users\eriks\Documents\GitHub Projects\Computacao-Grafica\TestePDI\TestePDI\img\geraldo3.jpg");
 
-            //Deixa em Scala de Cinza
+            //Deixa em Scala de Cinza com minha formula
+            for (int i = 0; i < b2.Width; i++)
+            {
+                for (int j = 0; j < b2.Height; j++)
+                {
+                    Color corOriginal = b2.GetPixel(i, j);
+
+                    int scalaCinza = (int)((corOriginal.R + corOriginal.G + corOriginal.B)/3);
+
+                    Color corScalar = Color.FromArgb(scalaCinza, scalaCinza, scalaCinza);
+
+                    b2.SetPixel(i, j, corScalar);
+                }
+            }
+
+            b2.Save(@"C:\Users\eriks\Documents\GitHub Projects\Computacao-Grafica\TestePDI\TestePDI\img\geraldo4.jpg");
+
+            //Deixa em Scala negativa
             for (int i = 0; i < b3.Width; i++)
             {
                 for (int j = 0; j < b3.Height; j++)
@@ -68,7 +85,7 @@ namespace TestePDI
                 }
             }
 
-            b2.Save(@"C:\Users\eriks\Documents\GitHub Projects\Computacao-Grafica\TestePDI\TestePDI\img\geraldo4.jpg");
+            b2.Save(@"C:\Users\eriks\Documents\GitHub Projects\Computacao-Grafica\TestePDI\TestePDI\img\geraldo5.jpg");
 
             Console.WriteLine("Fim do Processamento");
             Console.ReadKey();

@@ -55,38 +55,32 @@ namespace WindowsFormsApp.Filters
         {
             RGBImage image = (RGBImage)img.Clone();
 
-            var pixVal = image.Height / 3;
-
+       
 
             for (int i = 0; i < image.Width; i++)
             {
                 for (int j = 0; j < image.Height; j++)
                 {
                     var p = image.GetPixel(i, j);
-                    
-                    if (i < pixVal)
-                    {
-                        var r = (int)p.R * 0.09;
-                        var g = (int)p.G * 0.8;
-                        var b = (int)p.B * 0.11;
-                        image.SetPixel(i, j, new RGB((byte)r,(byte)g,(byte)b));
-                    }
-                    else if(i < (pixVal * 3)){
 
-                        var r = (int)p.R * 0.8;
-                        var g = (int)p.G * 0.09;
-                        var b = (int)p.B * 0.11;
-                        image.SetPixel(i, j, new RGB((byte)r, (byte)g, (byte)b));
+                    int m = (int)(p.R + p.G + p.B) / 3;
 
-                    }
-                    else if (i < ((pixVal * 3)*3))
+                    if (m >= 0 && m <= 63)
                     {
-                        var r = (int)p.R * 0.11;
-                        var g = (int)p.G * 0.09;
-                        var b = (int)p.B * 0.8;
-                        image.SetPixel(i, j, new RGB((byte)r, (byte)g, (byte)b));
+                        image.SetPixel(i, j, new RGB(51, 255, 51));
                     }
-                    
+                    if (m >= 64 && m <= 127)
+                    {
+                        image.SetPixel(i, j, new RGB(0, 0, 255));
+                    }
+                    if (m >= 127 && m <= 191)
+                    {
+                        image.SetPixel(i, j, new RGB(238, 255, 50));
+                    }
+                    if (m >= 192 && m <= 255)
+                    {
+                        image.SetPixel(i, j, new RGB(102, 0, 102));
+                    }
 
                 }
             }

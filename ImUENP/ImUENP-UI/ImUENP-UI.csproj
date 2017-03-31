@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filters\MediaMediana.cs" />
+    <Compile Include="Filters\RGBF.cs" />
     <Compile Include="Filters\ThreeShold.cs" />
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>

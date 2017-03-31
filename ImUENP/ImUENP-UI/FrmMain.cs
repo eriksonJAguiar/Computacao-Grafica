@@ -125,12 +125,35 @@ namespace ImUENP.UI
             pictureBox1.Refresh();
         }
 
-        private void multiLinearizacaoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void multiLimiarizacaoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var bpm = pictureBox1.Image;
             var img = RGBImage.FromImage((Bitmap)bpm);
-            var bin = new ThreeShold().ProcessMulti(img);
-            pictureBox1.Image = bin.ToImage();
+            var multi = new ThreeShold().ProcessMulti(img);
+            pictureBox1.Image = multi.ToImage();
+            pictureBox1.Refresh();
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void filtroMediaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var bpm = pictureBox1.Image;
+            var img = RGBImage.FromImage((Bitmap)bpm);
+            var media = new MediaMediana().media(img);
+            pictureBox1.Image = media.ToImage();
+            pictureBox1.Refresh();
+        }
+
+        private void filtroMedianaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var bpm = pictureBox1.Image;
+            var img = RGBImage.FromImage((Bitmap)bpm);
+            var mediana = new MediaMediana().mediana(img);
+            pictureBox1.Image = mediana.ToImage();
             pictureBox1.Refresh();
         }
     }

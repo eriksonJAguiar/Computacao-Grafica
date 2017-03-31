@@ -43,9 +43,12 @@
             this.cinzaNTSC1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.binarizacaoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.binarizacaoTotalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.multiLimiarizacaoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filtroMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.multiLinearizacaoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filtroMedianaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -128,7 +131,10 @@
             this.cinzaNTSC1ToolStripMenuItem,
             this.binarizacaoToolStripMenuItem,
             this.binarizacaoTotalToolStripMenuItem,
-            this.multiLinearizacaoToolStripMenuItem});
+            this.multiLimiarizacaoToolStripMenuItem,
+            this.refreshToolStripMenuItem,
+            this.filtroMediaToolStripMenuItem,
+            this.filtroMedianaToolStripMenuItem});
             this.filtrosToolStripMenuItem.Name = "filtrosToolStripMenuItem";
             this.filtrosToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.filtrosToolStripMenuItem.Text = "Filtros";
@@ -175,6 +181,27 @@
             this.binarizacaoTotalToolStripMenuItem.Text = "Binarizacao Total";
             this.binarizacaoTotalToolStripMenuItem.Click += new System.EventHandler(this.binarizacaoTotalToolStripMenuItem_Click);
             // 
+            // multiLimiarizacaoToolStripMenuItem
+            // 
+            this.multiLimiarizacaoToolStripMenuItem.Name = "multiLimiarizacaoToolStripMenuItem";
+            this.multiLimiarizacaoToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.multiLimiarizacaoToolStripMenuItem.Text = "Multi Limiarização";
+            this.multiLimiarizacaoToolStripMenuItem.Click += new System.EventHandler(this.multiLimiarizacaoToolStripMenuItem_Click);
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
+            // 
+            // filtroMediaToolStripMenuItem
+            // 
+            this.filtroMediaToolStripMenuItem.Name = "filtroMediaToolStripMenuItem";
+            this.filtroMediaToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.filtroMediaToolStripMenuItem.Text = "Filtro Media";
+            this.filtroMediaToolStripMenuItem.Click += new System.EventHandler(this.filtroMediaToolStripMenuItem_Click);
+            // 
             // openFileDialog
             // 
             this.openFileDialog.Filter = "Arquivos de Imagem|*.*";
@@ -185,12 +212,12 @@
             this.saveFileDialog.DefaultExt = "jpg";
             this.saveFileDialog.Title = "Salvar imagem";
             // 
-            // multiLinearizacaoToolStripMenuItem
+            // filtroMedianaToolStripMenuItem
             // 
-            this.multiLinearizacaoToolStripMenuItem.Name = "multiLinearizacaoToolStripMenuItem";
-            this.multiLinearizacaoToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.multiLinearizacaoToolStripMenuItem.Text = "Multi Linearizacao";
-            this.multiLinearizacaoToolStripMenuItem.Click += new System.EventHandler(this.multiLinearizacaoToolStripMenuItem_Click);
+            this.filtroMedianaToolStripMenuItem.Name = "filtroMedianaToolStripMenuItem";
+            this.filtroMedianaToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.filtroMedianaToolStripMenuItem.Text = "Filtro Mediana";
+            this.filtroMedianaToolStripMenuItem.Click += new System.EventHandler(this.filtroMedianaToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -230,7 +257,10 @@
         private System.Windows.Forms.ToolStripMenuItem cinzaNTSC1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem binarizacaoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem binarizacaoTotalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem multiLinearizacaoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem multiLimiarizacaoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem filtroMediaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem filtroMedianaToolStripMenuItem;
     }
 }
 

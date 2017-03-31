@@ -1,6 +1,7 @@
 ﻿using ImUENP.UI.Filters;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,8 +56,6 @@ namespace WindowsFormsApp.Filters
         {
             RGBImage image = (RGBImage)img.Clone();
 
-       
-
             for (int i = 0; i < image.Width; i++)
             {
                 for (int j = 0; j < image.Height; j++)
@@ -65,22 +64,19 @@ namespace WindowsFormsApp.Filters
 
                     int m = (int)(p.R + p.G + p.B) / 3;
 
-                    if (m >= 0 && m <= 63)
+                    if (m >= 0 && m <= 84)
                     {
-                        image.SetPixel(i, j, new RGB(51, 255, 51));
+                        image.SetPixel(i, j, new RGB(0,0,0));
                     }
-                    if (m >= 64 && m <= 127)
+                    if (m >= 85 && m <= 169)
                     {
-                        image.SetPixel(i, j, new RGB(0, 0, 255));
+                        image.SetPixel(i, j, new RGB(255, 255, 50));
                     }
-                    if (m >= 127 && m <= 191)
+                    if (m >= 170 && m <= 255)
                     {
-                        image.SetPixel(i, j, new RGB(238, 255, 50));
+                        image.SetPixel(i, j, new RGB(255,255,255));
                     }
-                    if (m >= 192 && m <= 255)
-                    {
-                        image.SetPixel(i, j, new RGB(102, 0, 102));
-                    }
+                    
 
                 }
             }

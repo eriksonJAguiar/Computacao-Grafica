@@ -46,9 +46,11 @@
             this.multiLimiarizacaoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filtroMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filtroMedianaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aforgeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.filtroMedianaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.melanomaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -79,7 +81,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.arquivoToolStripMenuItem,
-            this.filtrosToolStripMenuItem});
+            this.filtrosToolStripMenuItem,
+            this.aforgeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(638, 24);
@@ -202,6 +205,21 @@
             this.filtroMediaToolStripMenuItem.Text = "Filtro Media";
             this.filtroMediaToolStripMenuItem.Click += new System.EventHandler(this.filtroMediaToolStripMenuItem_Click);
             // 
+            // filtroMedianaToolStripMenuItem
+            // 
+            this.filtroMedianaToolStripMenuItem.Name = "filtroMedianaToolStripMenuItem";
+            this.filtroMedianaToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.filtroMedianaToolStripMenuItem.Text = "Filtro Mediana";
+            this.filtroMedianaToolStripMenuItem.Click += new System.EventHandler(this.filtroMedianaToolStripMenuItem_Click);
+            // 
+            // aforgeToolStripMenuItem
+            // 
+            this.aforgeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.melanomaToolStripMenuItem});
+            this.aforgeToolStripMenuItem.Name = "aforgeToolStripMenuItem";
+            this.aforgeToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.aforgeToolStripMenuItem.Text = "Aforge";
+            // 
             // openFileDialog
             // 
             this.openFileDialog.Filter = "Arquivos de Imagem|*.*";
@@ -212,12 +230,12 @@
             this.saveFileDialog.DefaultExt = "jpg";
             this.saveFileDialog.Title = "Salvar imagem";
             // 
-            // filtroMedianaToolStripMenuItem
+            // melanomaToolStripMenuItem
             // 
-            this.filtroMedianaToolStripMenuItem.Name = "filtroMedianaToolStripMenuItem";
-            this.filtroMedianaToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.filtroMedianaToolStripMenuItem.Text = "Filtro Mediana";
-            this.filtroMedianaToolStripMenuItem.Click += new System.EventHandler(this.filtroMedianaToolStripMenuItem_Click);
+            this.melanomaToolStripMenuItem.Name = "melanomaToolStripMenuItem";
+            this.melanomaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.melanomaToolStripMenuItem.Text = "melanoma";
+            this.melanomaToolStripMenuItem.Click += new System.EventHandler(this.melanomaToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -261,6 +279,8 @@
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem filtroMediaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem filtroMedianaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aforgeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem melanomaToolStripMenuItem;
     }
 }
 

@@ -30,6 +30,14 @@ namespace WindowsFormsApp.Filters
     }
     class MediaMediana
     {
+
+        int window;
+
+        public MediaMediana(int window)
+        {
+            this.window = window;
+        }
+
         public RGBImage media(RGBImage img)
         {
             RGBImage image = (RGBImage)img.Clone();
@@ -42,6 +50,7 @@ namespace WindowsFormsApp.Filters
 
                     RGBMM rgb = new RGBMM();
                     rgb.constructor();
+
 
                     rgb.getRGB(image.GetPixel(i, j).R, image.GetPixel(i, j).G, image.GetPixel(i, j).B);
                     rgb.getRGB(image.GetPixel(i + 1, j).R, image.GetPixel(i + 1, j).G, image.GetPixel(i + 1, j).B);

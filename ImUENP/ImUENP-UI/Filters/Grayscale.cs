@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ImUENP.UI.Filters
 {
-    public class Grayscale
+    public class Grayscale0
     {
         public Image Process(Image img)
         {

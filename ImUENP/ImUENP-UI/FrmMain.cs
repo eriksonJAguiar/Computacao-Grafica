@@ -56,7 +56,7 @@ namespace ImUENP.UI
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
             var img = (Bitmap)pictureBox1.Image;            
-            var gray = new Grayscale().Process(img);
+            var gray = new Grayscale0().Process(img);
             pictureBox1.Image = gray;
             pictureBox1.Refresh();
 
@@ -143,7 +143,7 @@ namespace ImUENP.UI
         {
             var bpm = pictureBox1.Image;
             var img = RGBImage.FromImage((Bitmap)bpm);
-            var media = new MediaMediana().media(img);
+            var media = new MediaMediana(4).media(img);
             pictureBox1.Image = media.ToImage();
             pictureBox1.Refresh();
         }
@@ -152,8 +152,16 @@ namespace ImUENP.UI
         {
             var bpm = pictureBox1.Image;
             var img = RGBImage.FromImage((Bitmap)bpm);
-            var mediana = new MediaMediana().mediana(img);
+            var mediana = new MediaMediana(4).mediana(img);
             pictureBox1.Image = mediana.ToImage();
+            pictureBox1.Refresh();
+        }
+
+        private void melanomaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var bpm = (Bitmap)pictureBox1.Image;
+            var melanoma = new Melanoma().ProcessMelanoma(bpm);
+            pictureBox1.Image = melanoma;
             pictureBox1.Refresh();
         }
     }

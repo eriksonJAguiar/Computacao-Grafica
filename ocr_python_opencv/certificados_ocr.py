@@ -1,15 +1,48 @@
-from PIL import Image
+import PIL.Image
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 import pytesseract
+import nltk
 import sys
-from PyQt5 import QtCore,QtGui,QtWidgets,uic
+from tkinter import *
+from tkinter.ttk import *
+import _thread
 
+valores = []
 
-##Variaveis Globais
-#stopwordsAux = "a, agora, ainda, alguém, algum, alguma, algumas, alguns, ampla, amplas, amplo, amplos, ante, antes, ao, aos, após, aquela, aquelas, aquele, aqueles, aquilo, as, até, através, cada, coisa, coisas, com, como, contra, contudo, da, daquele, daqueles, das, de, dela, delas, dele, deles, depois, dessa, dessas, desse, desses, desta, destas, deste, deste, destes, deve, devem, devendo, dever, deverá, deverão, deveria, deveriam, devia, deviam, disse, disso, disto, dito, diz, dizem, do, dos, e, é, ela, elas, ele, eles, em, enquanto, entre, era, essa, essas, esse, esses, esta, está, estamos, estão, estas, estava, estavam, estávamos, este, estes, estou, eu, fazendo, fazer, feita, feitas, feito, feitos, foi, for, foram, fosse, fossem, grande, grandes, há, isso, isto, já, la, lá, lhe, lhes, lo, mas, me, mesma, mesmas, mesmo, mesmos, meu, meus, minha, minhas, muita, muitas, muito, muitos, na, não, nas, nem, nenhum, nessa, nessas, nesta, nestas, ninguém, no, nos, nós, nossa, nossas, nosso, nossos, num, numa, nunca, o, os, ou, outra, outras, outro, outros, para, pela, pelas, pelo, pelos, pequena, pequenas, pequeno, pequenos, per, perante, pode, pude, podendo, poder, poderia, poderiam, podia, podiam, pois, por, porém, porque, posso, pouca, poucas, pouco, poucos, primeiro, primeiros, própria, próprias, próprio, próprios, quais, qual, quando, quanto, quantos, que, quem, são, se, seja, sejam, sem, sempre, sendo, será, serão, seu, seus, si, sido, só, sob, sobre, sua, suas, talvez, também, tampouco, te, tem, tendo, tenha, ter, teu, teus, ti, tido, tinha, tinham, toda, todas, todavia, todo, todos, tu, tua, tuas, tudo, última, últimas, último, últimos, um, uma, umas, uns, vendo, ver, vez, vindo, vir, vos, vós"
-#stopwords = stopwordsAux.split(',')
+class App(Frame):
+
+    def __init__(self, parent):
+        Frame.__init__(self, parent)
+        self.CreateUI()
+        self.LoadTable()
+        self.grid(sticky = (N,S,W,E))
+        parent.grid_rowconfigure(0, weight = 1)
+        parent.grid_columnconfigure(0, weight = 1)
+
+    def CreateUI(self):
+        tv = Treeview(self)
+        tv['columns'] = ('curso', 'dias', 'horas','organizador')
+        tv.heading("#0", text='Nome', anchor='w')
+        tv.column("#0", anchor="w")
+        tv.heading('curso', text='Curso')
+        tv.column('curso', anchor='center', width=100)
+        tv.heading('dias', text='Dias')
+        tv.column('dias', anchor='center', width=100)
+        tv.heading('horas', text='Horas')
+        tv.column('horas', anchor='center', width=100)
+        tv.heading('organizador', text='Organizardor')
+        tv.column('organizador', anchor='center', width=100)
+        tv.grid(sticky = (N,S,W,E))
+        self.treeview = tv
+        self.grid_rowconfigure(0, weight = 1)
+        self.grid_columnconfigure(0, weight = 1)
+
+    def LoadTable(self):
+        self.treeview.insert('', 'end', text=valores[4], values=(valores[3],
+                             valores[0], valores[1],valores[3]))
+
 
 
 def levenshtein(a,b):
@@ -35,11 +68,17 @@ def levenshtein(a,b):
 
 ##Processamento da Imagem
 
-def processingImg(caminho):
+##printar Tela da Imagem
+def window_img(img):
+    plt.imshow(img,cmap='gray',interpolation = 'bicubic')
+    plt.xticks([]), plt.yticks([])  # to hide tick values on X and Y axis
+    plt.show()
+
+def processingImg(caminho,newfile):
 
     im = cv2.imread(caminho)
 
-    gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)  
 
     _,th = cv2.threshold(gray,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 
@@ -54,67 +93,164 @@ def processingImg(caminho):
 
     crop_img = th2[350:(height-350),:width]
 
-    cv2.imwrite(caminho,crop_img)
+    cv2.imwrite(newfile,crop_img)
 
     return crop_img
 
 ##Extração com OCR
 def ocr(caminho):
-    str_text = pytesseract.image_to_string(Image.open(caminho))
+    str_text = pytesseract.image_to_string(PIL.Image.open(caminho))
     return str_text
 
-##printar Tela da Imagem
-def window_img(img):
-    plt.imshow(img,cmap='gray',interpolation = 'bicubic')
-    plt.xticks([]), plt.yticks([])  # to hide tick values on X and Y axis
-    plt.show()
+##Conjunto de métodos para o reconhecimento do texto
+def removeStopwords(texto):
+    #remove stopwords
+    filtrado = [w for w in nltk.word_tokenize(texto) if not w in nltk.corpus.stopwords.words('portuguese')]
+
+    return filtrado
+
+def verificaSimilaridade(str,tokens):
+
+    for t in tokens:
+        if levenshtein(t,str) < 2:
+            return t
+
+def getDays(tokens):
+    word_day = verificaSimilaridade('dias',tokens)
+
+    days = ''
+
+    i = 0
+    for t in tokens:
+        if t == word_day:
+            j = i + 1
+            while tokens[j] != ',' :
+                days += tokens[j] + ' '
+                j += 1 
+
+            return days
+
+        i += 1
+
+def getOrganizador(tokens):
+    
+    word_organizador = []
+
+    word_organizador.append(verificaSimilaridade('durante',tokens))
+    word_organizador.append(verificaSimilaridade('realizado',tokens))
 
 
+    organizador = ''
+    i = 0
+    for t in tokens:
+        
+        if t in word_organizador:
+      
+            organizador += tokens[i+1] +' '+ tokens[i+2] + ' ' + tokens[i+3]
+
+            return organizador
+
+        i += 1
+
+def getCurso(tokens):
+    word_curso = []
+
+    word_curso.append(verificaSimilaridade('curso',tokens))
+    word_curso.append(verificaSimilaridade('minicurso',tokens))
+
+    curso = ''
+    
+    i = 0
+    for t in tokens:
+        if t == word_curso[0] or t == word_curso[1]:
+            j = i + 1
+            while tokens[j] != ',':
+                curso += tokens[j] + ' '
+                j += 1
+
+            return curso
+
+        i += 1
 
 
-##Reconhecimento do Texto
+def getHoras(tokens):
+ 
+    hora = verificaSimilaridade('horas',tokens)
 
-#tokens = str_text.split(' ')
+    horas = ''   
+    
+    i = 0
+    for t in tokens:
+        if t == hora:
+            txt = '{0}'.format(tokens[i-1])
+            if (not txt.isdigit()):
+                j = i-1
+                while tokens[j] != '(':
+                    horas = tokens[j]
+                    j -= 1
 
-#preprocess(str_text)
+                return horas        
 
-#participante = ['participacao','certificamos','dias']
+            horas = txt    
+            
+            return horas       
 
-#curso = ['curso','mincurso']
+        i += 1
+def processingText(str_text):
+    
+    str_text = str_text.lower()
 
-#organizador = ['realizado','universidade','instituto',]
+    sem_stopwords = removeStopwords(str_text)
 
+    days = getDays(sem_stopwords)    
+    hora = getHoras(sem_stopwords)
+    curso = getCurso(sem_stopwords)
+    organizador = getOrganizador(sem_stopwords)
 
-#for t in tokens:
-#    print(t)
+    json_file = {
+        'organizador': organizador,
+        'horas': hora,
+        'curso': curso,
+        'data':days
+    }
 
-#datas = []
-#minicurso = ''
-#dias = []
-#horas = ''
+    valores.append(days)
+    valores.append(hora)
+    valores.append(curso)
+    valores.append(organizador)
 
-#i = 0
+    return json_file
 
-#for token in tokens:
-#	if(token.isdigit()):
-#		datas.append(token)
-	
-#	if(levenshtein(token,'minicurso') < 5):
-#		minicurso = tokens[i+1]
+def main():
 
-	
+   root = Tk()
+   App(root)
+   root.mainloop()
 
-#	i += 1
 
 ##metodo principal
 if __name__ == '__main__':
+    
     filename = "certificados/campus"
     extension = '.png'
     file = filename + extension
-    newfile = filename+"_process.png"
+    newfile = filename+"_crop.png"
 
-    img = processingImg(file)
+    img = processingImg(file,newfile)
     str_text = ocr(newfile)
-    print(str_text)
+
+    processingText(str_text)
+
+    #window_img(img)
+
+    valores.append('Charlinhos')
+
+    _thread.start_new_thread(window_img,(img,))
+    _thread.start_new_thread(main())
+
+    
+    
+
+   
 
 

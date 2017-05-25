@@ -1,0 +1,6 @@
+C:\Users\eriks\Documents\GitHub Projects\Computacao-Grafica\TestePDI\TestePDI\bin\Debug\TestePDI.exe.config
+C:\Users\eriks\Documents\GitHub Projects\Computacao-Grafica\TestePDI\TestePDI\bin\Debug\TestePDI.exe
+C:\Users\eriks\Documents\GitHub Projects\Computacao-Grafica\TestePDI\TestePDI\bin\Debug\TestePDI.pdb
+C:\Users\eriks\Documents\GitHub Projects\Computacao-Grafica\TestePDI\TestePDI\obj\Debug\TestePDI.csprojResolveAssemblyReference.cache
+C:\Users\eriks\Documents\GitHub Projects\Computacao-Grafica\TestePDI\TestePDI\obj\Debug\TestePDI.exe
+C:\Users\eriks\Documents\GitHub Projects\Computacao-Grafica\TestePDI\TestePDI\obj\Debug\TestePDI.pdb

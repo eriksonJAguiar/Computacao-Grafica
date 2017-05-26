@@ -1,0 +1,83 @@
+<html lang="pt-BR">
+
+<head>
+	<meta charset="utf-8"/>
+	<title>Sintese</title>
+	<style type="text/css">
+		#cv
+		{
+			border:1px solid #000000;  
+			padding-left: 0;
+    		padding-right: 0;
+    		margin-left: auto;
+    		margin-right: auto;
+    		display: block;
+		}
+	</style>
+</head>
+
+<body>
+	 <canvas id="cv" width="900" height="550" >
+	 	<img id="ball" src="ball.png" width="10" height="10" />
+	 </canvas> 
+</body>
+<script type="text/javascript">
+	var c = document.getElementById("cv");
+	var ctx = c.getContext("2d");
+
+	function drawCircle(x,y,radius)
+	{
+		ctx.beginPath();
+		ctx.arc(x,y,radius,0,2*Math.PI);
+		ctx.stroke();
+		ctx.fillStyle = "#FF0000";
+		ctx.fill();
+	}
+	
+	function drawImage(){
+		var img = new Image();
+		img.src = document.getElementById("ball");
+		ctx.drawImage(img,10,10);
+	}
+
+	drawImage()
+
+	var targetX = c.width;
+ 	var targetY = c.height;
+    var x = 10;
+    var y = 10;
+    var velX = 0;
+    var velY = 0;
+    var speed = 2;
+
+function update(){
+    var tx = targetX - x,
+        ty = targetY - y,
+/*        dist = Math.sqrt(tx*tx+ty*ty),
+        rad = Math.atan2(ty,tx),
+        angle = rad/Math.PI * 180;*/
+
+        velX = (tx/dist)*speed,
+        velY = (ty/dist)*speed;
+
+        x += velX
+        y += velY
+
+        ctx.clearRect(0,0,500,500);
+        drawCircle(x,y,50)
+
+    setTimeout(update,10);
+}
+
+//update();
+
+/*c.addEventListener("mousemove", function(e){
+    targetX = e.pageX;
+    targetY = e.pageY;
+});*/
+
+
+</script>
+
+
+</html>
